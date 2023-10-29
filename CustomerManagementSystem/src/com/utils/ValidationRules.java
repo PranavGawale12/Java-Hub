@@ -22,10 +22,6 @@ public class ValidationRules {
 		}
 	}
 	
-	public static LocalDate parseDate(String date)
-	{
-		return LocalDate.parse(date);
-	}
 	
 	public static void checkDuplicateEmail(String email,List<Customer> custList) throws InvalidEmailException
 	{
@@ -37,11 +33,13 @@ public class ValidationRules {
 	
 	//add a method to call validation rules
 	public static Customer validateAllException(String firstName,String lastName,String email,
-			String password,double registrationAmount,String dob,String plan,List<Customer> list) throws InvalidInputException,IllegalArgumentException,InvalidEmailException{
+			String password,double registrationAmount,String regDate,String dob,String plan,String lastSubPaid,List<Customer> list) throws InvalidInputException,IllegalArgumentException,InvalidEmailException{
 		ServicePlan serPlan=parseAndValidationPlan(plan);
 		validatePlanAmount(serPlan,registrationAmount);
 		checkDuplicateEmail(email,list);
-		LocalDate cDate=parseDate(dob);
-		return new Customer(firstName,lastName,email,password,registrationAmount,cDate,serPlan);
+		LocalDate rDate=LocalDate.parse(regDate);
+		LocalDate dDate=LocalDate.parse(dob);
+		LocalDate pDate=LocalDate.parse(lastSubPaid);
+		return new Customer(firstName,lastName,email,password,registrationAmount,rDate,dDate,serPlan,pDate);
 	}
 }

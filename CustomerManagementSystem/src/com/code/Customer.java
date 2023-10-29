@@ -9,22 +9,30 @@ public class Customer implements Comparable<Customer> {
 	private String email;
 	private String password;
 	private double registrationAmount;
+	private LocalDate registrationDate;
 	private LocalDate dob;
 	private ServicePlan plan;
+	private LocalDate lastSubscriptionPaidDate;
 	private static int customerIdCounter;
 	
-	public Customer(String firstName,String lastName,String email,String password,double registrationAmount,LocalDate dob,ServicePlan plan) {	
+	public Customer(String firstName,String lastName,String email,String password,double registrationAmount,LocalDate registrationDate,LocalDate dob,ServicePlan plan,LocalDate lastSubscribtionPaidDate) {	
 		this.customerId=customerIdCounter;
 		this.firstName=firstName;
 		this.lastName=lastName;
 		this.email=email;
 		this.password=password;
 		this.registrationAmount=registrationAmount;
+		this.registrationDate=registrationDate;
 		this.dob=dob;
 		this.plan=plan;
+		this.lastSubscriptionPaidDate=lastSubscribtionPaidDate;
 		customerIdCounter++;
 	}
 	
+	public LocalDate getDob() {
+		return dob;
+	}
+
 	public Customer(String email) {
 		super();
 		this.email = email;
@@ -38,6 +46,10 @@ public class Customer implements Comparable<Customer> {
 		this.password = password;
 	}
 
+	public String getLastName() {
+		return lastName;
+	}
+
 	static {
 		customerIdCounter=1000;
 	}
@@ -46,9 +58,9 @@ public class Customer implements Comparable<Customer> {
 	
 	@Override
 	public String toString() {
-		return "\nCustomerId=" + customerId + "\nFirstName=" + firstName + "\nLastName=" + lastName + "\nEmail="
-				+ email + "\nPassword=" + password + "\nRegistrationAmount=" + registrationAmount + "\nDate of Birth=" + dob
-				+ "\nService Plan=" + plan ;
+		return "\nCustomerId=" + customerId + "\nFirstName=" + firstName + "\nLastName=" + lastName+"\nDate of Birth=" + dob + "\nEmail="
+				+ email + "\nPassword=" + password + "\nRegistrationAmount=" + registrationAmount +"\nRegistration Date="+ registrationDate
+				+ "\nService Plan=" + plan+"\nLastSubscriptionPaidDate="+lastSubscriptionPaidDate ;
 	}
 
 	@Override
@@ -60,6 +72,26 @@ public class Customer implements Comparable<Customer> {
 		return false;
 	}
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public ServicePlan getPlan() {
+		return plan;
+	}
+
+	public LocalDate getLastSubscriptionPaidDate() {
+		return lastSubscriptionPaidDate;
+	}
+
+	public void setLastSubscriptionPaidDate(LocalDate lastSubscriptionPaidDate) {
+		this.lastSubscriptionPaidDate = lastSubscriptionPaidDate;
+	}
+
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+
 	@Override
 	public int compareTo(Customer anotherCustomer) {
 		return this.email.compareTo(anotherCustomer.email);
